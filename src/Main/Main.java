@@ -1,38 +1,34 @@
 package Main;
 
+import TaskManager.*;
 import Typeoftasks.Epic;
 import Typeoftasks.*;
-import TaskManager.TaskManager;
 
 public class Main {
 
-    static TaskManager ts;
-
     public static void main(String[] args) {
-        ts = new TaskManager();
-        ts.addTask(new Task("Task1", "Task1")); // -- Задача с ID 1
-        ts.addTask(new Task("Task2", "Task2")); // -- Задача с ID 2
-        ts.addEpic(new Epic("Epic1", "Epic1")); // --  Эпик c ID 3
-        ts.addSubtask(new Subtask("Subtask1", "Subtask1", 3)); // -- Подзадача с ID 4
-        ts.addSubtask(new Subtask("Subtask2", "Subtask2", 3)); // -- Подзадача с ID 5
-        ts.addEpic(new Epic("Epic2", "Epic2")); // -- Эпик с ID 6
-        ts.addSubtask(new Subtask("Subtask3", "Subtask3", 6)); // -- Подзадача с ID 7
-        System.out.println(ts.getAllTasks());
-        System.out.println(ts.getAllEpics());
-        System.out.println(ts.getAllSubtasks());
-        ts.updateTask(new Task("NewTask1", "NewTask1"), 1, "DONE");
-        ts.updateTask(new Task("NewTask2", "NewTask2"), 2, "IN_PROGRESS");
-        ts.updateSubtask(new Subtask("NewSubtask2", "NewSubtask2", 3), 4, "DONE");
-        ts.updateSubtask(new Subtask("NewSubtask2", "NewSubtask2", 3), 5, "DONE");
-        ts.updateSubtask(new Subtask("NewSubtask2", "NewSubtask2", 6), 7, "IN_PROGRESS");
-        System.out.println(ts.getAllTasks());
-        System.out.println(ts.getAllEpics());
-        System.out.println(ts.getAllSubtasks());
-        ts.removeByIdTask(1); // Удаление по ID
-        ts.removeByIdEpic(3); // Удаление по ID
-        System.out.println(ts.getAllTasks());
-        System.out.println(ts.getAllEpics());
-        System.out.println(ts.getAllSubtasks());
+        InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
+        inMemoryTaskManager.addTask(new Task("Task1", "Task1")); // -- Задача с ID 1
+        inMemoryTaskManager.addTask(new Task("Task2", "Task2")); // -- Задача с ID 2
+        inMemoryTaskManager.addTask(new Task("Task3", "Task2")); // -- Задача с ID 2
+        inMemoryTaskManager.addTask(new Task("Task4", "Task2")); // -- Задача с ID 2
+        inMemoryTaskManager.addTask(new Task("Task5", "Task2")); // -- Задача с ID 2
+        inMemoryTaskManager.addTask(new Task("Task6", "Task2")); // -- Задача с ID 2
+        inMemoryTaskManager.addEpic(new Epic("Epic7", "epic"));
+        inMemoryTaskManager.addSubtask(new Subtask("Subtask8", "Subtask", 7));
+        inMemoryTaskManager.addSubtask(new Subtask("Subtask9", "Subtask", 7));
+        inMemoryTaskManager.addSubtask(new Subtask("Subtask10", "Subtask", 7));
+        inMemoryTaskManager.searchByIdTask(1);
+        inMemoryTaskManager.searchByIdTask(2);
+        inMemoryTaskManager.searchByIdTask(3);
+        inMemoryTaskManager.searchByIdTask(4);
+        inMemoryTaskManager.searchByIdTask(5);
+        inMemoryTaskManager.searchByIdTask(6);
+        inMemoryTaskManager.searchByIdSubtask(8);
+        inMemoryTaskManager.searchByIdSubtask(9);
+        inMemoryTaskManager.searchByIdSubtask(10);
+        inMemoryTaskManager.searchByIdEpic(7);
+        System.out.println(inMemoryTaskManager.getHistory());
 
     }
 }
