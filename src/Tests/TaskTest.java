@@ -1,6 +1,6 @@
 package Tests;
 
-import TaskManager.InMemoryTaskManager;
+import TaskManager.*;
 import Typeoftasks.Task;
 import org.junit.jupiter.api.Test;
 
@@ -8,17 +8,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TaskTest {
 
-    InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
+    TaskManager taskManager = Manager.getDefault();
 
     @Test
         //1
     void testAddTask() {
 
-        inMemoryTaskManager.addTask(new Task("Task1", "Task1")); // -- Задача с ID 1
-        Task task1 = inMemoryTaskManager.searchByIdTask(1);
-        Task task2 = inMemoryTaskManager.searchByIdTask(1);
+        taskManager.addTask(new Task("Task1", "Task1")); // -- Задача с ID 1
+        Task task1 = taskManager.searchByIdTask(1);
+        Task task2 = taskManager.searchByIdTask(1);
         assertEquals(task1, task2);
     }
-
-
 }

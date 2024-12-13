@@ -5,9 +5,15 @@ import Typeoftasks.Subtask;
 import Typeoftasks.Task;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface TaskManager {
+
+    HashMap<Integer, Task> tasks = new HashMap<>();
+    HashMap<Integer, Epic> epics = new HashMap<>();
+    HashMap<Integer, Subtask> subtasks = new HashMap<>();
+
     // Добавление Задачи/Task
     void addTask(Task task);
 

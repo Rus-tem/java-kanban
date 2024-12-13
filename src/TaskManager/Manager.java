@@ -1,6 +1,6 @@
 package TaskManager;
 
-public class Managers {
+public class Manager {
 
     public static TaskManager getDefault() {
 

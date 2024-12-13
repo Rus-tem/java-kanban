@@ -4,16 +4,12 @@ import Typeoftasks.*;
 import Status.Status;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
 public class InMemoryTaskManager implements TaskManager {
-    private final HashMap<Integer, Task> tasks = new HashMap<>();
-    private final HashMap<Integer, Epic> epics = new HashMap<>();
-    private final HashMap<Integer, Subtask> subtasks = new HashMap<>();
     private int nextId = 1;
-    private HistoryManager historyManager = new InMemoryHistoryManager(10);
+    private final HistoryManager historyManager = Manager.getDefaultHistory();
 
     // Добавление Задачи/Task
     @Override
@@ -240,7 +236,6 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public List<Task> getHistory() {
-
         return historyManager.getHistory();
     }
 }
