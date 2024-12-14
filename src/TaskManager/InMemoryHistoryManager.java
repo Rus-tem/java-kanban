@@ -2,10 +2,12 @@ package TaskManager;
 
 import Typeoftasks.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
+    private final List<Task> historyTasks = new ArrayList<>();
     private final int sizeHistoryMemory;
 
     public InMemoryHistoryManager(int sizeHistoryMemory) {

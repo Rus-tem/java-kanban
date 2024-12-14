@@ -1,18 +1,10 @@
 package TaskManager;
 
-import Typeoftasks.Epic;
-import Typeoftasks.Subtask;
-import Typeoftasks.Task;
+import Typeoftasks.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public interface TaskManager {
-
-    HashMap<Integer, Task> tasks = new HashMap<>();
-    HashMap<Integer, Epic> epics = new HashMap<>();
-    HashMap<Integer, Subtask> subtasks = new HashMap<>();
 
     // Добавление Задачи/Task
     void addTask(Task task);
@@ -33,13 +25,13 @@ public interface TaskManager {
     void updateSubtask(Subtask subtask, int idSubtask, String newStatus);
 
     // Печать списка всех задач
-    ArrayList<Task> getAllTasks();
+    List<Task> getAllTasks();
 
     // Печать списка всех эпиков
-    ArrayList<Epic> getAllEpics();
+    List<Epic> getAllEpics();
 
     // Печать списка всех подзадач
-    ArrayList<Subtask> getAllSubtasks();
+    List<Subtask> getAllSubtasks();
 
     // Удаление всех задач +
     void clearAllTasks();
