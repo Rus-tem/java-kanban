@@ -1,7 +1,7 @@
-package Tests;
+package tests;
 
-import TaskManager.*;
-import Typeoftasks.*;
+import taskManager.*;
+import typeoftasks.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

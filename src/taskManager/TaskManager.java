@@ -1,6 +1,6 @@
-package TaskManager;
+package taskManager;
 
-import Typeoftasks.*;
+import typeoftasks.*;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface TaskManager {
     // Добавление Эпика/Epic
     void addEpic(Epic epic);
 
-    // Добавление Позадачи/Subtask
+    // Добавление Subtask
     void addSubtask(Subtask subtask);
 
     // Обновление Задачи/Task

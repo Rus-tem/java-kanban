@@ -1,8 +1,8 @@
-package Tests;
+package tests;
 
-import Status.Status;
-import TaskManager.*;
-import Typeoftasks.*;
+import status.Status;
+import taskManager.*;
+import typeoftasks.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

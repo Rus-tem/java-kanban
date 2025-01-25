@@ -1,8 +1,7 @@
-package Main;
+package main;
 
-import Status.Status;
-import TaskManager.*;
-import Typeoftasks.*;
+import taskManager.*;
+import typeoftasks.*;
 
 public class Main {
 

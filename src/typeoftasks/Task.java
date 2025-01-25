@@ -1,6 +1,6 @@
-package Typeoftasks;
+package typeoftasks;
 
-import Status.Status;
+import status.Status;
 
 public class Task {
     private int id;

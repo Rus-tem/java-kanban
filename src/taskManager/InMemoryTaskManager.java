@@ -1,7 +1,7 @@
-package TaskManager;
+package taskManager;
 
-import Typeoftasks.*;
-import Status.Status;
+import typeoftasks.*;
+import status.Status;
 
 import java.util.*;
 
