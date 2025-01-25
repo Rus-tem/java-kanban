@@ -1,7 +1,7 @@
 package tests;
 
 import status.Status;
-import taskManager.*;
+import taskmanager.*;
 import typeoftasks.*;
 import org.junit.jupiter.api.Test;
 

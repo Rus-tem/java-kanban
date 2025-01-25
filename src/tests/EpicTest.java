@@ -1,6 +1,6 @@
 package tests;
 
-import taskManager.*;
+import taskmanager.*;
 import typeoftasks.*;
 import org.junit.jupiter.api.Test;
 

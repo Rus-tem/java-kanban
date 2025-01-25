@@ -1,7 +1,8 @@
-package taskManager;
+package taskmanager;
 
 import typeoftasks.*;
 import java.util.List;
+
 public interface TaskManager {
 
     // Добавление Задачи/Task

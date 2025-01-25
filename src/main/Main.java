@@ -1,6 +1,6 @@
 package main;
 
-import taskManager.*;
+import taskmanager.*;
 import typeoftasks.*;
 
 public class Main {
