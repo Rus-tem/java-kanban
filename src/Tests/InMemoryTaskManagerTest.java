@@ -94,4 +94,57 @@ class InMemoryTaskManagerTest {
         assertEquals(task1.getId(), task1.getId());
         System.out.println(historyManager.getHistory());
     }
+
+    @Test
+    void removeTasksEpicsSubtasks() {
+        taskManager.addTask(new Task("Task1", "Task1"));
+        taskManager.addEpic(new Epic("Epic2", "Epic2"));
+        taskManager.addSubtask(new Subtask("Subtask1", "Subtask4", 2));
+        taskManager.addSubtask(new Subtask("Subtask2", "Subtask3", 2));
+        taskManager.addSubtask(new Subtask("Subtask3", "Subtask3", 2));
+        taskManager.removeByIdEpic(2);
+        taskManager.removeByIdTask(1);
+        assertTrue(taskManager.getHistory().isEmpty());
+        System.out.println(taskManager.getAllTasks());
+        System.out.println((taskManager.getAllSubtasks()));
+        System.out.println(taskManager.getAllEpics());
+    }
+
+    @Test
+    void checkEpicsSubtasksId() {
+        taskManager.addEpic(new Epic("Epic1", "Epic1"));
+        taskManager.addSubtask(new Subtask("Subtask1", "Subtask1", 1));
+        taskManager.addSubtask(new Subtask("Subtask2", "Subtask2", 1));
+        System.out.println((taskManager.getAllSubtasks()));
+        System.out.println(taskManager.getAllEpics());
+        taskManager.printSubtasksByEpics(1);
+        Epic epic = taskManager.searchByIdEpic(1);
+        taskManager.removeByIdSubtask(2);
+        taskManager.removeByIdSubtask(3);
+        System.out.println((taskManager.getAllSubtasks()));
+        System.out.println(epic.getSubtasksIds());
+        assertTrue(epic.getSubtasksIds().isEmpty());
+
+    }
+
+    @Test
+    void addLastTasksEpicsSubtask() {
+        taskManager.addTask(new Task("Task1", "Task1"));
+        Task task = taskManager.searchByIdTask(1);
+        taskManager.searchByIdTask(1);
+        Task task1 = taskManager.getHistory().getLast();
+        assertEquals(task, task1);
+
+        taskManager.addEpic(new Epic("Epic1", "Epic1"));
+        Epic epic = taskManager.searchByIdEpic(2);
+        taskManager.searchByIdEpic(2);
+        Task task2 = taskManager.getHistory().getLast();
+        assertEquals(epic, task2);
+
+        taskManager.addSubtask(new Subtask("Subtask1", "Subtask1", 2));
+        Subtask subtask = taskManager.searchByIdSubtask(3);
+        taskManager.searchByIdSubtask(3);
+        Task task3 = taskManager.getHistory().getLast();
+        assertEquals(subtask, task3);
+    }
 }

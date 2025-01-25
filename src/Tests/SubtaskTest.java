@@ -36,4 +36,5 @@ class SubtaskTest {
         System.out.println("Подзадачи эпика с ID 1: ");
         taskManager.printSubtasksByEpics(1);
     }
+
 }
