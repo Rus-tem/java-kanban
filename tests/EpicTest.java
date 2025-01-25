@@ -1,8 +1,6 @@
-package tests;
-
-import taskmanager.*;
-import typeoftasks.*;
 import org.junit.jupiter.api.Test;
+import taskmanager.*;
+import typeoftasks.Epic;
 
 import static org.junit.jupiter.api.Assertions.*;
 

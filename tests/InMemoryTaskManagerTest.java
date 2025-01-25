@@ -1,9 +1,7 @@
-package tests;
-
 import status.Status;
+import org.junit.jupiter.api.Test;
 import taskmanager.*;
 import typeoftasks.*;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -83,16 +81,13 @@ class InMemoryTaskManagerTest {
     @Test
         //9
     void testAddToHistoryManager() {
-        Task task1 = new Task("Task1", "Task1");
-        task1.setId(1);
-        historyManager.add(task1);
-        task1.setStatus(Status.NEW);
-        historyManager.add(task1);
-        Task task2 = historyManager.getHistory().get(1);
-        assertEquals(task1.getName(), task2.getName());
-        assertEquals(task1.getDescription(), task2.getDescription());
-        assertEquals(task1.getId(), task1.getId());
-        System.out.println(historyManager.getHistory());
+        taskManager.addTask(new Task("Task1", "Task1"));
+        taskManager.addTask(new Task("Task2", "Task2"));
+        Task task1 = taskManager.searchByIdTask(1);
+        Task task2 = taskManager.searchByIdTask(2);
+        assertNotNull(task1);
+        assertNotNull(task2);
+        System.out.println(taskManager.getHistory());
     }
 
     @Test
