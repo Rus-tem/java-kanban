@@ -12,18 +12,6 @@ public class InMemoryTaskManager implements TaskManager {
     private int nextId = 1;
     private final HistoryManager historyManager = Manager.getDefaultHistory();
 
-    public Map<Integer, Task> getTasks() {
-        return tasks;
-    }
-
-    public Map<Integer, Epic> getEpics() {
-        return epics;
-    }
-
-    public Map<Integer, Subtask> getSubtasks() {
-        return subtasks;
-    }
-
 
     // Добавление Задачи/Task
     @Override

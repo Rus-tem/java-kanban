@@ -7,9 +7,9 @@ import java.util.*;
 public class InMemoryHistoryManager implements HistoryManager {
 
     private final List<Task> historyTasks = new ArrayList<>();
+    private final Map<Integer, Node<Task>> historyNode = new HashMap<>();
     private Node<Task> tail;
     private Node<Task> head;
-    Map<Integer, Node<Task>> historyNode = new HashMap<>();
 
     @Override
     public void add(Task task) {
