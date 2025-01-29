@@ -26,7 +26,7 @@ public class Main {
         taskManager.removeByIdEpic(4);
         taskManager.removeByIdSubtask(5);
         System.out.println(taskManager.getHistory());
-
+        System.out.println(taskManager.getHistory());
 
     }
 }
