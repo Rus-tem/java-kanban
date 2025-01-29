@@ -1,4 +1,4 @@
-package TaskManager;
+package taskmanager;
 
 public class Manager {
 
@@ -9,6 +9,6 @@ public class Manager {
 
     public static HistoryManager getDefaultHistory() {
 
-        return new InMemoryHistoryManager(10);
+        return new InMemoryHistoryManager();
     }
 }

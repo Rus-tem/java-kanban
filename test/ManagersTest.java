@@ -1,9 +1,6 @@
-package Tests;
-
-import TaskManager.*;
-import Typeoftasks.Task;
 import org.junit.jupiter.api.Test;
-
+import taskmanager.*;
+import typeoftasks.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ManagersTest {
