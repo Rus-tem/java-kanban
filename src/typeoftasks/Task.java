@@ -8,11 +8,10 @@ public class Task {
     private String description;
     private Status status;
 
-    public Task( typeOfTasks name, String description) {
+    public Task(typeOfTasks name, String description) {
         this.name = name;
         this.description = description;
     }
-
 
 
     @Override // переопределяем toString
