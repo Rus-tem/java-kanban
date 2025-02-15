@@ -12,8 +12,8 @@ class SubtaskTest {
         // 2
     void testAddSubtask() {
 
-        taskManager.addEpic(new Epic(typeOfTasks.EPIC, "Epic1"));
-        taskManager.addSubtask(new Subtask(typeOfTasks.SUBTASK, "Subtask1", 1));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC, "Epic1"));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask1", 1));
         Subtask subtask1 = taskManager.searchByIdSubtask(2);
         Subtask subtask2 = taskManager.searchByIdSubtask(2);
         assertEquals(subtask1, subtask2);
@@ -22,9 +22,9 @@ class SubtaskTest {
     @Test
         //4
     void testAddSubtaskToSubtask() {
-        taskManager.addEpic(new Epic(typeOfTasks.EPIC, "Epic1"));
-        taskManager.addSubtask(new Subtask(typeOfTasks.SUBTASK, "Subtask1", 1));
-        taskManager.addSubtask(new Subtask(typeOfTasks.SUBTASK, "Subtask2", 1));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC, "Epic1"));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask1", 1));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask2", 1));
         taskManager.printSubtasksByEpics(1);
         taskManager.getAllSubtasks();
 
