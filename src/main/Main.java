@@ -17,8 +17,8 @@ public class Main {
         System.out.println(loadFromFile.getAllEpics());
         System.out.println(loadFromFile.getAllSubtasks());
         System.out.println();
-        fileBackedTaskManager.addTask(new Task(typeOfTasks.TASK, "1"));
-        fileBackedTaskManager.addTask(new Task(typeOfTasks.TASK, "2"));
+        fileBackedTaskManager.addTask(new Task(TypeOfTasks.TASK, "1"));
+        fileBackedTaskManager.addTask(new Task(TypeOfTasks.TASK,"2"));
         System.out.println(loadFromFile.getAllTasks());
         System.out.println(fileBackedTaskManager.getAllTasks());
 

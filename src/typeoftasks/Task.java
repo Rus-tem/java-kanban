@@ -4,11 +4,11 @@ import status.Status;
 
 public class Task {
     private int id;
-    private typeOfTasks name;
+    private TypeOfTasks name;
     private String description;
     private Status status;
 
-    public Task(typeOfTasks name, String description) {
+    public Task(TypeOfTasks name, String description) {
         this.name = name;
         this.description = description;
     }
@@ -26,7 +26,7 @@ public class Task {
         return id;
     }
 
-    public typeOfTasks getName() {
+    public TypeOfTasks getName() {
         return name;
     }
 
@@ -42,7 +42,7 @@ public class Task {
         this.id = id;
     }
 
-    public void setName(typeOfTasks name) {
+    public void setName(TypeOfTasks name) {
         this.name = name;
     }
 

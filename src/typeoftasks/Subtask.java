@@ -3,7 +3,7 @@ package typeoftasks;
 public class Subtask extends Task {
     private int epicId;
 
-    public Subtask(typeOfTasks getName, String getDescription, int epicId) {
+    public Subtask(TypeOfTasks getName, String getDescription, int epicId) {
         super(getName, getDescription);
         this.epicId = epicId;
     }
