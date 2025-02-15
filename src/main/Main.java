@@ -3,30 +3,24 @@ package main;
 import taskmanager.*;
 import typeoftasks.*;
 
+import java.io.File;
+
 public class Main {
 
     public static void main(String[] args) {
+
         TaskManager taskManager = Manager.getDefault();
         HistoryManager historyManager = Manager.getDefaultHistory();
-        taskManager.addTask(new Task("Task1", "Task1"));
-        taskManager.addTask(new Task("Task2", "Task2"));
-        taskManager.addEpic(new Epic("Epic1", "EmptyEpic1"));
-        taskManager.addEpic(new Epic("Epic2", "Epic2"));
-        taskManager.addSubtask(new Subtask("Subtask1", "Subtask4", 4));
-        taskManager.addSubtask(new Subtask("Subtask2", "Subtask3", 4));
-        taskManager.addSubtask(new Subtask("Subtask3", "Subtask3", 4));
-        taskManager.searchByIdTask(1);
-        taskManager.searchByIdEpic(4);
-        taskManager.searchByIdSubtask(5);
-        taskManager.searchByIdEpic(4);
-        taskManager.searchByIdEpic(3);
-        taskManager.searchByIdSubtask(5);
-        taskManager.searchByIdSubtask(6);
-        System.out.println(taskManager.getHistory());
-        taskManager.removeByIdEpic(4);
-        taskManager.removeByIdSubtask(5);
-        System.out.println(taskManager.getHistory());
-        System.out.println(taskManager.getHistory());
+        FileBackedTaskManager fileBackedTaskManager = Manager.loadFromFile(taskManager, historyManager);
+        FileBackedTaskManager loadFromFile = Manager.loadFromFile(new File("E:\\test.txt"));
+        System.out.println( loadFromFile.getAllTasks());
+        System.out.println(loadFromFile.getAllEpics());
+        System.out.println(loadFromFile.getAllSubtasks());
+        System.out.println();
+        fileBackedTaskManager.addTask(new Task(typeOfTasks.TASK, "1"));
+        fileBackedTaskManager.addTask(new Task(typeOfTasks.TASK,"2"));
+        System.out.println(loadFromFile.getAllTasks());
+        System.out.println(fileBackedTaskManager.getAllTasks());
 
     }
 }

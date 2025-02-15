@@ -6,7 +6,21 @@ import status.Status;
 import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
+
+    public Map<Integer, Task> getTasks() {
+        return tasks;
+    }
+
     private final Map<Integer, Task> tasks = new HashMap<>();
+
+    public Map<Integer, Epic> getEpics() {
+        return epics;
+    }
+
+    public Map<Integer, Subtask> getSubtasks() {
+        return subtasks;
+    }
+
     private final Map<Integer, Epic> epics = new HashMap<>();
     private final Map<Integer, Subtask> subtasks = new HashMap<>();
     private int nextId = 1;

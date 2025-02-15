@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 import taskmanager.*;
 import typeoftasks.Epic;
+import typeoftasks.typeOfTasks;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,8 +13,8 @@ class EpicTest {
         //2
     void testAddEpic() {
 
-        taskManager.addEpic(new Epic("Epic1", "Epic1"));
-        taskManager.addEpic(new Epic("Epic1", "Epic1"));
+        taskManager.addEpic(new Epic(typeOfTasks.EPIC, "Epic1"));
+        taskManager.addEpic(new Epic(typeOfTasks.EPIC, "Epic1"));
         Epic epic1 = taskManager.searchByIdEpic(1);
         Epic epic2 = taskManager.searchByIdEpic(1);
         assertEquals(epic1, epic2);
@@ -23,8 +24,8 @@ class EpicTest {
         //3
     void testAddEpicToEpic() {
 
-        taskManager.addEpic(new Epic("Epic1", "Epic1"));
-        taskManager.addEpic(new Epic("Epic2", "Epic2"));
+        taskManager.addEpic(new Epic(typeOfTasks.EPIC, "Epic1"));
+        taskManager.addEpic(new Epic(typeOfTasks.EPIC, "Epic2"));
         Epic epic1 = taskManager.searchByIdEpic(1);
         Epic epic2 = taskManager.searchByIdEpic(2);
         assertTrue(epic1.getSubtasksIds().isEmpty());
