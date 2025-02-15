@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 import taskmanager.*;
 import typeoftasks.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ManagersTest {
@@ -10,8 +11,8 @@ class ManagersTest {
     void testManagersGetDefault() {
         TaskManager taskManager = Manager.getDefault();
         taskManager.addTask(new Task(TypeOfTasks.TASK, "Task1"));
-        assertEquals("Task1", taskManager.searchByIdTask(1).getName());
-        assertEquals("Task1", taskManager.getHistory().getLast().getName());
+        assertEquals(TypeOfTasks.TASK, taskManager.searchByIdTask(1).getName());
+        assertEquals(TypeOfTasks.TASK, taskManager.getHistory().getLast().getName());
     }
 
     @Test
