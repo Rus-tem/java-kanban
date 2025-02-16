@@ -14,19 +14,8 @@ public class Manager {
         return new InMemoryHistoryManager();
     }
 
-    public static FileBackedTaskManager loadFromFile(TaskManager taskManager, HistoryManager historyManager) {
-
-        return new FileBackedTaskManager();
-    }
-
-    public static FileBackedTaskManager loadFromFile(TaskManager taskManager, HistoryManager historyManager, File loadFromFile) {
-        FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager();
-        fileBackedTaskManager.loadFromFile(loadFromFile);
-        return fileBackedTaskManager;
-    }
-
     public static FileBackedTaskManager loadFromFile(File loadFromFile) {
-        FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager();
+        FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager(new File("E:\\folder_test_git\\text3.txt"));
         fileBackedTaskManager.loadFromFile(loadFromFile);
         return fileBackedTaskManager;
     }

@@ -11,15 +11,13 @@ public class Main {
 
         TaskManager taskManager = Manager.getDefault();
         HistoryManager historyManager = Manager.getDefaultHistory();
-        FileBackedTaskManager fileBackedTaskManager = Manager.loadFromFile(taskManager, historyManager);
-        FileBackedTaskManager loadFromFile = Manager.loadFromFile(new File("E:\\test.txt"));
-        System.out.println(loadFromFile.getAllTasks());
-        System.out.println(loadFromFile.getAllEpics());
-        System.out.println(loadFromFile.getAllSubtasks());
+        FileBackedTaskManager fileBackedTaskManager = Manager.loadFromFile(new File("E:\\folder_test_git\\text3.txt"));
+        System.out.println(fileBackedTaskManager.getAllTasks());
+        System.out.println(fileBackedTaskManager.getAllEpics());
+        System.out.println(fileBackedTaskManager.getAllSubtasks());
         System.out.println();
-        fileBackedTaskManager.addTask(new Task(TypeOfTasks.TASK, "1"));
-        fileBackedTaskManager.addTask(new Task(TypeOfTasks.TASK,"2"));
-        System.out.println(loadFromFile.getAllTasks());
+        fileBackedTaskManager.addTask(new Task("TASK", "4"));
+        fileBackedTaskManager.addTask(new Task("TASK", "5"));
         System.out.println(fileBackedTaskManager.getAllTasks());
 
     }

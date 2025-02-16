@@ -12,9 +12,9 @@ class InMemoryTaskManagerTest {
     @Test
         // 6
     void testAddTasksEpicsSubtasks() {
-        taskManager.addTask(new Task(TypeOfTasks.TASK, "Task1"));
-        taskManager.addEpic(new Epic(TypeOfTasks.EPIC, "Epic1"));
-        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask1", 2));
+        taskManager.addTask(new Task(TypeOfTasks.TASK.toString(), "Task1"));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic1"));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask1", 2));
         Task task1 = taskManager.searchByIdTask(1);
         Epic epic1 = taskManager.searchByIdEpic(2);
         Subtask subtask1 = taskManager.searchByIdSubtask(3);
@@ -26,12 +26,12 @@ class InMemoryTaskManagerTest {
     @Test
         // 7
     void testsTasksEpicsSubtasksById() {
-        taskManager.addTask(new Task(TypeOfTasks.TASK, "Task1"));
-        taskManager.addTask(new Task(TypeOfTasks.TASK, "Task2"));
-        taskManager.addEpic(new Epic(TypeOfTasks.EPIC, "Epic1"));
-        taskManager.addEpic(new Epic(TypeOfTasks.EPIC, "Epic2"));
-        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask3", 3));
-        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask4", 3));
+        taskManager.addTask(new Task(TypeOfTasks.TASK.toString(), "Task1"));
+        taskManager.addTask(new Task(TypeOfTasks.TASK.toString(), "Task2"));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic1"));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic2"));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask3", 3));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask4", 3));
         Task task1 = taskManager.searchByIdTask(1);
         Task task2 = taskManager.searchByIdTask(2);
         task2.setId(1);
@@ -53,21 +53,21 @@ class InMemoryTaskManagerTest {
         //8
     void testsAllFieldsTaskSubtaksEpic() {
 
-        taskManager.addTask(new Task(TypeOfTasks.TASK, "Task1"));
+        taskManager.addTask(new Task(TypeOfTasks.TASK.toString(), "Task1"));
         Task task1 = taskManager.searchByIdTask(1);
         Task task2 = taskManager.searchByIdTask(1);
         assertEquals(task1.getName(), task2.getName());
         assertEquals(task1.getDescription(), task2.getDescription());
         assertEquals(task1.getStatus(), task2.getStatus());
         assertEquals(task1.getId(), task2.getId());
-        taskManager.addEpic(new Epic(TypeOfTasks.EPIC, "Epic2"));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic2"));
         Epic epic1 = taskManager.searchByIdEpic(2);
         Epic epic2 = taskManager.searchByIdEpic(2);
         assertEquals(epic1.getId(), epic2.getId());
         assertEquals(epic1.getName(), epic2.getName());
         assertEquals(epic1.getDescription(), epic2.getDescription());
         assertEquals(epic1.getStatus(), epic2.getStatus());
-        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask3", 2));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask3", 2));
         Subtask subtask1 = taskManager.searchByIdSubtask(3);
         Subtask subtask2 = taskManager.searchByIdSubtask(3);
         assertEquals(subtask1.getId(), subtask2.getId());
@@ -80,8 +80,8 @@ class InMemoryTaskManagerTest {
     @Test
         //9
     void testAddToHistoryManager() {
-        taskManager.addTask(new Task(TypeOfTasks.TASK, "Task1"));
-        taskManager.addTask(new Task(TypeOfTasks.TASK, "Task2"));
+        taskManager.addTask(new Task(TypeOfTasks.TASK.toString(), "Task1"));
+        taskManager.addTask(new Task(TypeOfTasks.TASK.toString(), "Task2"));
         Task task1 = taskManager.searchByIdTask(1);
         Task task2 = taskManager.searchByIdTask(2);
         assertNotNull(task1);
@@ -91,11 +91,11 @@ class InMemoryTaskManagerTest {
 
     @Test
     void removeTasksEpicsSubtasks() {
-        taskManager.addTask(new Task(TypeOfTasks.TASK, "Task1"));
-        taskManager.addEpic(new Epic(TypeOfTasks.EPIC, "Epic2"));
-        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask4", 2));
-        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask3", 2));
-        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask3", 2));
+        taskManager.addTask(new Task(TypeOfTasks.TASK.toString(), "Task1"));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic2"));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask4", 2));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask3", 2));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask3", 2));
         taskManager.removeByIdEpic(2);
         taskManager.removeByIdTask(1);
         assertTrue(taskManager.getHistory().isEmpty());
@@ -106,9 +106,9 @@ class InMemoryTaskManagerTest {
 
     @Test
     void checkEpicsSubtasksId() {
-        taskManager.addEpic(new Epic(TypeOfTasks.EPIC, "Epic1"));
-        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask1", 1));
-        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask2", 1));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic1"));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask1", 1));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask2", 1));
         System.out.println((taskManager.getAllSubtasks()));
         System.out.println(taskManager.getAllEpics());
         taskManager.printSubtasksByEpics(1);
@@ -123,19 +123,19 @@ class InMemoryTaskManagerTest {
 
     @Test
     void addLastTasksEpicsSubtask() {
-        taskManager.addTask(new Task(TypeOfTasks.TASK, "Task1"));
+        taskManager.addTask(new Task(TypeOfTasks.TASK.toString(), "Task1"));
         Task task = taskManager.searchByIdTask(1);
         taskManager.searchByIdTask(1);
         Task task1 = taskManager.getHistory().getLast();
         assertEquals(task, task1);
 
-        taskManager.addEpic(new Epic(TypeOfTasks.EPIC, "Epic1"));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic1"));
         Epic epic = taskManager.searchByIdEpic(2);
         taskManager.searchByIdEpic(2);
         Task task2 = taskManager.getHistory().getLast();
         assertEquals(epic, task2);
 
-        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK, "Subtask1", 2));
+        taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask1", 2));
         Subtask subtask = taskManager.searchByIdSubtask(3);
         taskManager.searchByIdSubtask(3);
         Task task3 = taskManager.getHistory().getLast();

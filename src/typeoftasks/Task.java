@@ -4,15 +4,14 @@ import status.Status;
 
 public class Task {
     private int id;
-    private TypeOfTasks name;
+    private String name;
     private String description;
     private Status status;
 
-    public Task(TypeOfTasks name, String description) {
+    public Task(String name, String description) {
         this.name = name;
         this.description = description;
     }
-
 
     @Override // переопределяем toString
     public String toString() {
@@ -26,7 +25,7 @@ public class Task {
         return id;
     }
 
-    public TypeOfTasks getName() {
+    public String getName() {
         return name;
     }
 
@@ -42,7 +41,7 @@ public class Task {
         this.id = id;
     }
 
-    public void setName(TypeOfTasks name) {
+    public void setName(String name) {
         this.name = name;
     }
 
