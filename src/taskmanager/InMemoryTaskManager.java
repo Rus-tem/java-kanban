@@ -19,6 +19,7 @@ public class InMemoryTaskManager implements TaskManager {
         task.setId(nextId++);
         task.setStatus(Status.NEW);
         tasks.put(task.getId(), task);
+
     }
 
     // Добавление Эпика/Epic
