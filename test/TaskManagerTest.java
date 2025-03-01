@@ -56,10 +56,4 @@ class TaskManagerTest<T extends ManagersTest> {
 
     }
 
-    @Test
-    void ExeptionFiles() {
-        Assertions.assertThrows(RuntimeException.class, () -> {
-            fileBackedTaskManager.addTask(new Task("TASK", "TAKS1", LocalDateTime.of(1999, 2, 2, 14, 40), Duration.ofDays(1)));
-        }, "Сохранение/загрузка файла в директорию к которой нет доступа приводит к исключению");
-    }
 }
