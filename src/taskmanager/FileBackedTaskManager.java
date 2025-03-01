@@ -8,6 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.file.Files;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 // Класс для сохранения/загрузки задач в/из файла
@@ -17,6 +20,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     public FileBackedTaskManager(File fileToSave) {
         this.fileToSave = fileToSave;
     }
+
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     @Override
     public void addTask(Task task) {
@@ -123,6 +128,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     // метод сохраняет текущее состояние задач в файл
     public void loadFromFile(File loadFromFile) {
+
         String file;
         try {
             file = Files.readString(loadFromFile.toPath());
@@ -139,6 +145,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             String nameOfTask = "";
             String description = "";
             String status = "";
+            String localDateTime = "";
+            String duration = "";
             int epicId = 0;
 
             while (first != -1) {
@@ -154,42 +162,61 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                     counter = counter + 1;
                 } else if (counter == 3) {
                     status = stringBuilder.substring(first + 2, last);
+                    counter = counter + 1;
+                } else if (counter == 4) {
+                    //LocalTime !!!
+                    localDateTime = stringBuilder.substring(first + 2, last);
+                    counter = counter + 1;
+                } else if (counter == 5) {
+                    // Duration !!!
+                    duration = stringBuilder.substring(first + 2, last);
+                    counter = counter + 1;
                     stringBuilder.delete(0, last + 2);
                     if (!stringBuilder.isEmpty()) {
                         epicId = Integer.parseInt(String.valueOf(stringBuilder));
-                    }
-                    if (nameOfTask.equals("TASK")) {
-                        Task task = new Task(TypeOfTasks.TASK.toString(), description);
-                        task.setId(id);
-                        if (status.equals("NEW")) task.setStatus(Status.NEW);
-                        else if (status.equals("DONE")) task.setStatus(Status.DONE);
-                        else task.setStatus(Status.IN_PROGRESS);
-                        tasks.put(task.getId(), task);
-                    } else if (nameOfTask.equals("EPIC")) {
-                        Epic epic = new Epic(TypeOfTasks.EPIC.toString(), description);
-                        epic.setId(id);
-                        if (status.equals("NEW")) epic.setStatus(Status.NEW);
-                        else if (status.equals("DONE")) epic.setStatus(Status.DONE);
-                        else epic.setStatus(Status.IN_PROGRESS);
-                        epics.put(epic.getId(), epic);
-                    } else if (nameOfTask.equals("SUBTASK")) {
-                        Subtask subtask = new Subtask(TypeOfTasks.SUBTASK.toString(), description, epicId);
-                        subtask.setId(id);
-                        if (status.equals("NEW")) subtask.setStatus(Status.NEW);
-                        else if (status.equals("DONE")) subtask.setStatus(Status.DONE);
-                        else subtask.setStatus(Status.IN_PROGRESS);
-                        subtasks.put(subtask.getId(), subtask);
-                    } else {
-                        System.out.println("Такой задачи не найдено");
-                        break;
                     }
                 }
                 stringBuilder.delete(0, last + 2);
                 first = stringBuilder.indexOf(":");
                 last = stringBuilder.indexOf(",");
             }
+            if (nameOfTask.equals("TASK")) {
+                Task task = new Task(TypeOfTasks.TASK.toString(), description, LocalDateTime.parse(localDateTime, DATE_TIME_FORMATTER), Duration.parse(duration));
+                task.setId(id);
+                if (status.equals("NEW")) task.setStatus(Status.NEW);
+                else if (status.equals("DONE")) task.setStatus(Status.DONE);
+                else task.setStatus(Status.IN_PROGRESS);
+                tasks.put(task.getId(), task);
+                checkTasksCross(task);
+            } else if (nameOfTask.equals("EPIC")) {
+                Epic epic = new Epic(TypeOfTasks.EPIC.toString(), description, LocalDateTime.parse(localDateTime, DATE_TIME_FORMATTER), Duration.parse(duration));
+                epic.setId(id);
+                if (status.equals("NEW")) epic.setStatus(Status.NEW);
+                else if (status.equals("DONE")) epic.setStatus(Status.DONE);
+                else epic.setStatus(Status.IN_PROGRESS);
+                epics.put(epic.getId(), epic);
+                calculationDateTimeAndDurationEpic();
+                checkTasksCross(epic);
+                // метод обновлению по расчету времени и длительности
+            } else if (nameOfTask.equals("SUBTASK")) {
+                Subtask subtask = new Subtask(TypeOfTasks.SUBTASK.toString(), description, LocalDateTime.parse(localDateTime, DATE_TIME_FORMATTER), Duration.parse(duration), epicId);
+                subtask.setId(id);
+                if (status.equals("NEW")) subtask.setStatus(Status.NEW);
+                else if (status.equals("DONE")) subtask.setStatus(Status.DONE);
+                else subtask.setStatus(Status.IN_PROGRESS);
+                subtasks.put(subtask.getId(), subtask);
+                calculationDateTimeAndDurationEpic();
+                checkTasksCross(subtask);
+            } else {
+                System.out.println("Такой задачи не найдено");
+                break;
+            }
+            stringBuilder.delete(0, last + 2);
+            first = stringBuilder.indexOf(":");
+            last = stringBuilder.indexOf(",");
         }
     }
+
 
     // метод загружает задачи из файла
     private void save() {
