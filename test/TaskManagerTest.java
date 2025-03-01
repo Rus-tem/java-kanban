@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TaskManagerTest<T extends ManagersTest> {
     TaskManager taskManager = Manager.getDefault();
-    FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager(new File("C:\\"));
+    FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager(new File("path:\\"));
 
     @Test
     void testEpics() {
