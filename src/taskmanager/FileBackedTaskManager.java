@@ -15,13 +15,13 @@ import java.util.List;
 
 // Класс для сохранения/загрузки задач в/из файла
 public class FileBackedTaskManager extends InMemoryTaskManager {
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
     private final File fileToSave;
 
     public FileBackedTaskManager(File fileToSave) {
         this.fileToSave = fileToSave;
     }
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     @Override
     public void addTask(Task task) {

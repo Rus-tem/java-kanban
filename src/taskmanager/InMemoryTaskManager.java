@@ -93,28 +93,25 @@ public class InMemoryTaskManager implements TaskManager {
     // Печать списка всех задач
     @Override
     public List<Task> getAllTasks() {
-        return tasks.values().stream().toList();
+        return new ArrayList<>(tasks.values());
     }
 
     // Печать списка всех эпиков
     @Override
     public List<Epic> getAllEpics() {
-        return epics.values().stream().toList();
+        return new ArrayList<>(epics.values());
     }
 
     // Печать списка всех подзадач
     @Override
     public List<Subtask> getAllSubtasks() {
-        return subtasks.values().stream().toList();
+        return new ArrayList<>(subtasks.values());
     }
 
     // Удаление всех задач +
     @Override
     public void clearAllTasks() {
-        List<Task> removeTask = sortByTime.stream()
-                .filter(task -> task.getName().equals("Task") || task.getName().equals("TASK") || task.getName().equals(TypeOfTasks.TASK.toString()))
-                .toList();
-        removeTask.forEach(sortByTime::remove);
+        sortByTime.removeAll(tasks.values());
         tasks.clear();
         System.out.println("Все задачи удалены");
     }
@@ -122,10 +119,7 @@ public class InMemoryTaskManager implements TaskManager {
     // Удаление всех подзадач/subtask +
     @Override
     public void clearAllSubtasks() {
-        List<Task> removeSubtask = sortByTime.stream()
-                .filter(subtask -> subtask.getName().equals("Subtask") || subtask.getName().equals("SUBTAKS") || subtask.getName().equals(TypeOfTasks.SUBTASK.toString()))
-                .toList();
-        removeSubtask.forEach(sortByTime::remove);
+        sortByTime.removeAll(subtasks.values());
         subtasks.clear();
         System.out.println("Все подзадачи удалены");
         epics.values().forEach(epic -> epic.setStatus(Status.NEW));
@@ -245,57 +239,17 @@ public class InMemoryTaskManager implements TaskManager {
         Set<Task> crossTasks = new HashSet<>();
         if (sortByTime.isEmpty()) {
             sortByTime.add(task);
-        } else if (tasks.containsKey(task.getId())) {
+        } else {
             crossTasks = sortByTime.stream()
-                    .dropWhile(task1 -> {
-                        if ((task1.getStartTime().isBefore(task.getEndTime()) && task1.getEndTime().isBefore(task.getStartTime()))) {
-                            taskToAdd.add(task);
-                            return true;
-                        } else if (task1.getStartTime().isAfter(task.getEndTime()) && task1.getEndTime().isAfter(task.getStartTime())) {
+                    .dropWhile(checkTasks -> {
+                        if ((checkTasks.getStartTime().isBefore(task.getEndTime()) && checkTasks.getEndTime().isBefore(task.getStartTime()))
+                                || (checkTasks.getStartTime().isAfter(task.getEndTime()) && checkTasks.getEndTime().isAfter(task.getStartTime()))) {
                             taskToAdd.add(task);
                             return true;
                         } else if (sortByTime.equals(task)) {
                             return false;
                         } else {
-                            System.out.println("Задача: " + "№" + task.getId() + " " + task.getName() + " пересекается по времени с другой задачей: " + "№" + task1.getId() + " " + task1.getName());
-                            return false;
-                        }
-                    })
-                    .collect(Collectors.toSet());
-            if (crossTasks.isEmpty() && !taskToAdd.isEmpty()) sortByTime.addAll(taskToAdd);
-
-        } else if (epics.containsKey(task.getId())) {
-            crossTasks = sortByTime.stream()
-                    .dropWhile(epic1 -> {
-                        if ((epic1.getStartTime().isBefore(task.getEndTime()) && epic1.getEndTime().isBefore(task.getStartTime()))) {
-                            taskToAdd.add(task);
-                            return true;
-                        } else if (epic1.getStartTime().isAfter(task.getEndTime()) && epic1.getEndTime().isAfter(task.getStartTime())) {
-                            taskToAdd.add(task);
-                            return true;
-                        } else if (sortByTime.equals(task)) {
-                            return false;
-                        } else {
-                            System.out.println("Задача: " + "№" + task.getId() + " " + task.getName() + " пересекается по времени с другой задачей: " + "№" + epic1.getId() + " " + epic1.getName());
-                            return false;
-                        }
-                    })
-                    .collect(Collectors.toSet());
-            if (crossTasks.isEmpty() && !taskToAdd.isEmpty()) sortByTime.addAll(taskToAdd);
-
-        } else if (subtasks.containsKey(task.getId())) {
-            crossTasks = sortByTime.stream()
-                    .dropWhile(subtask1 -> {
-                        if ((subtask1.getStartTime().isBefore(task.getEndTime()) && subtask1.getEndTime().isBefore(task.getStartTime()))) {
-                            taskToAdd.add(task);
-                            return true;
-                        } else if (subtask1.getStartTime().isAfter(task.getEndTime()) && subtask1.getEndTime().isAfter(task.getStartTime())) {
-                            taskToAdd.add(task);
-                            return true;
-                        } else if (sortByTime.equals(task)) {
-                            return false;
-                        } else {
-                            System.out.println("Задача: " + "№" + task.getId() + " " + task.getName() + " пересекается по времени с другой задачей: " + "№" + subtask1.getId() + " " + subtask1.getName());
+                            System.out.println("Задача: " + "№" + task.getId() + " " + task.getName() + " пересекается по времени с другой задачей: " + "№" + checkTasks.getId() + " " + checkTasks.getName());
                             return false;
                         }
                     })

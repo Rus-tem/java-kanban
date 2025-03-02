@@ -15,7 +15,7 @@ public class Manager {
     }
 
     public static FileBackedTaskManager loadFromFile(File loadFromFile) {
-        FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager(new File("E:\\folder_test_git\\text5.txt")); // путь сохранения задач
+        FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager(loadFromFile); // путь сохранения задач
         fileBackedTaskManager.loadFromFile(loadFromFile);
         return fileBackedTaskManager;
     }
