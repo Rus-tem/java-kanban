@@ -3,6 +3,9 @@ import taskmanager.*;
 import typeoftasks.Epic;
 import typeoftasks.*;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EpicTest {
@@ -13,8 +16,8 @@ class EpicTest {
         //2
     void testAddEpic() {
 
-        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic1"));
-        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic1"));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic1", LocalDateTime.now(), Duration.ofMinutes(10)));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic1", LocalDateTime.now(), Duration.ofMinutes(10)));
         Epic epic1 = taskManager.searchByIdEpic(1);
         Epic epic2 = taskManager.searchByIdEpic(1);
         assertEquals(epic1, epic2);
@@ -24,8 +27,8 @@ class EpicTest {
         //3
     void testAddEpicToEpic() {
 
-        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic1"));
-        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic2"));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic1", LocalDateTime.now(), Duration.ofMinutes(10)));
+        taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic2", LocalDateTime.now(), Duration.ofMinutes(10)));
         Epic epic1 = taskManager.searchByIdEpic(1);
         Epic epic2 = taskManager.searchByIdEpic(2);
         assertTrue(epic1.getSubtasksIds().isEmpty());
