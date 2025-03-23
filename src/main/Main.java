@@ -16,6 +16,5 @@ public class Main {
         HistoryManager historyManager = Manager.getDefaultHistory();
         FileBackedTaskManager fileBackedTaskManager = Manager.loadFromFile(new File("E:\\folder_test_git\\text5.txt")); // загрузка файла
 
-
     }
 }

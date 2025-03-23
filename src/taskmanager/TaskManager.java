@@ -61,10 +61,12 @@ public interface TaskManager {
     void removeByIdEpic(int idEpic);
 
     // Печать списка всех подзадач определённого эпика по ID эпика +
-    void printSubtasksByEpics(int numberEpic);
+    List<Subtask> printSubtasksByEpics(int numberEpic);
 
     // Просмотр истории задач
     List<Task> getHistory();
 
     List<Task> getPrioritizedTasks();
+
+    boolean checkTasksToTime();
 }
