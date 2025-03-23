@@ -1,7 +1,9 @@
 package taskmanager;
 
-import typeoftasks.*;
 import status.Status;
+import typeoftasks.Epic;
+import typeoftasks.Subtask;
+import typeoftasks.Task;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
