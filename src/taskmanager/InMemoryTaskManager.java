@@ -12,12 +12,12 @@ import java.util.stream.Collectors;
 
 
 public class InMemoryTaskManager implements TaskManager {
-    public boolean checkTasks;
     protected final Map<Integer, Task> tasks = new HashMap<>();
     protected final Map<Integer, Epic> epics = new HashMap<>();
     protected final Map<Integer, Subtask> subtasks = new HashMap<>();
-    private int nextId = 1;
     private final HistoryManager historyManager = Manager.getDefaultHistory();
+    private int nextId = 1;
+    private boolean checkTasks;
     private Set<Task> sortByTime = new TreeSet<>(Comparator.comparing(Task::getStartTime).thenComparing(Task::getId));
 
     // Добавление Задачи/Task
@@ -217,7 +217,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     // Печать списка всех подзадач определённого эпика по ID эпика +
     @Override
-    public List<Subtask> printSubtasksByEpics(int numberEpic) {
+    public List<Subtask> getSubtasksByEpics(int numberEpic) {
         return subtasks.values().stream()
                 .filter(subtask -> subtask.getEpicId() == numberEpic)
                 .collect(Collectors.toList());

@@ -25,7 +25,7 @@ public class HistoryHandler extends BaseHttpHandler implements HttpHandler {
             String response = gson.toJson(getHistory.toString());
             sendText(exchange, response, 200); // код 200
         } else {
-            String response = "Такой эндпоинт отсутствует";
+            String response = "Указанный метод недоступен для данного эндпойнта";
             sendNotFound(exchange, response); // код 200
         }
     }

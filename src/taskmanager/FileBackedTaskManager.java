@@ -120,8 +120,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public List<Subtask> printSubtasksByEpics(int numberEpic) {
-        return super.printSubtasksByEpics(numberEpic);
+    public List<Subtask> getSubtasksByEpics(int numberEpic) {
+        return super.getSubtasksByEpics(numberEpic);
     }
 
     @Override

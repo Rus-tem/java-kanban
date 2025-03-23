@@ -14,9 +14,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
     private final TaskManager taskManager;
     private final Gson gson = new Gson();
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     public SubtaskHandler(TaskManager taskManager) {
         this.taskManager = taskManager;
@@ -25,7 +25,7 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        System.out.println("Началась обработка /tasks запроса от клиента.");
+        System.out.println("Началась обработка /subtask запроса от клиента.");
         String response = "";
         String path = exchange.getRequestURI().getPath();
         String[] id = path.split("/");
@@ -147,7 +147,7 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
                 }
             }
             default:
-                response = gson.toJson("Такой эндпоинт отсутствует");
+                response = gson.toJson("Указанный метод недоступен для данного эндпойнта");
                 sendNotFound(exchange, response);
         }
     }

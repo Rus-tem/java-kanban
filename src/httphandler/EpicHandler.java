@@ -15,9 +15,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class EpicHandler extends BaseHttpHandler implements HttpHandler {
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
     private final TaskManager taskManager;
     private final Gson gson = new Gson();
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     public EpicHandler(TaskManager taskManager) {
         this.taskManager = taskManager;
@@ -30,7 +30,6 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
         String path = exchange.getRequestURI().getPath();
         String[] id = path.split("/");
         int idTask = 0;
-        System.out.println(id.length);
         switch (exchange.getRequestMethod()) {
             case "GET": {
                 if (id.length == 3) {
@@ -60,7 +59,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
                             response = gson.toJson("Такой задачи нет");
                             sendNotFound(exchange, response); // код ош 404
                         }
-                        List<Subtask> getSubtasks = taskManager.printSubtasksByEpics(idTask);
+                        List<Subtask> getSubtasks = taskManager.getSubtasksByEpics(idTask);
                         response = gson.toJson(getSubtasks.toString());
                         sendText(exchange, response, 200); // код 200
                     } else {
@@ -138,7 +137,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
                 }
             }
             default:
-                response = gson.toJson("Такой эндпоинт отсутствует");
+                response = gson.toJson("Указанный метод недоступен для данного эндпойнта");
                 sendNotFound(exchange, response);
         }
     }

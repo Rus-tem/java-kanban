@@ -14,9 +14,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class TaskHandler extends BaseHttpHandler implements HttpHandler {
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
     private final TaskManager taskManager;
     private final Gson gson = new Gson();
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     public TaskHandler(TaskManager taskManager) {
         this.taskManager = taskManager;
@@ -141,7 +141,7 @@ public class TaskHandler extends BaseHttpHandler implements HttpHandler {
                 }
             }
             default:
-                response = gson.toJson("Такой эндпоинт отсутствует");
+                response = gson.toJson("Указанный метод недоступен для данного эндпойнта");
                 sendNotFound(exchange, response);
         }
     }
