@@ -114,7 +114,7 @@ class InMemoryTaskManagerTest {
         taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask2", LocalDateTime.now(), Duration.ofMinutes(10), 1));
         System.out.println((taskManager.getAllSubtasks()));
         System.out.println(taskManager.getAllEpics());
-        taskManager.printSubtasksByEpics(1);
+        taskManager.getSubtasksByEpics(1);
         Epic epic = taskManager.searchByIdEpic(1);
         taskManager.removeByIdSubtask(2);
         taskManager.removeByIdSubtask(3);

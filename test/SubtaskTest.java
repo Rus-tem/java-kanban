@@ -28,7 +28,7 @@ class SubtaskTest {
         taskManager.addEpic(new Epic(TypeOfTasks.EPIC.toString(), "Epic1", LocalDateTime.now(), Duration.ofMinutes(10)));
         taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask1", LocalDateTime.now(), Duration.ofMinutes(10), 1));
         taskManager.addSubtask(new Subtask(TypeOfTasks.SUBTASK.toString(), "Subtask2", LocalDateTime.now(), Duration.ofMinutes(10), 1));
-        taskManager.printSubtasksByEpics(1);
+        taskManager.getSubtasksByEpics(1);
         taskManager.getAllSubtasks();
 
     }
