@@ -1,7 +1,9 @@
 package taskmanager;
 
-import typeoftasks.*;
 import status.Status;
+import typeoftasks.Epic;
+import typeoftasks.Subtask;
+import typeoftasks.Task;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -10,12 +12,12 @@ import java.util.stream.Collectors;
 
 
 public class InMemoryTaskManager implements TaskManager {
-
     protected final Map<Integer, Task> tasks = new HashMap<>();
     protected final Map<Integer, Epic> epics = new HashMap<>();
     protected final Map<Integer, Subtask> subtasks = new HashMap<>();
-    private int nextId = 1;
     private final HistoryManager historyManager = Manager.getDefaultHistory();
+    private int nextId = 1;
+    private boolean checkTasks;
     private Set<Task> sortByTime = new TreeSet<>(Comparator.comparing(Task::getStartTime).thenComparing(Task::getId));
 
     // Добавление Задачи/Task
@@ -74,8 +76,8 @@ public class InMemoryTaskManager implements TaskManager {
             epics.put(idEpic, epic);
             return;
         }
-        changeStatusEpic(idEpic);
         calculationDateTimeAndDurationEpic();
+        changeStatusEpic(idEpic);
     }
 
     // Обновление подзадачи/Subtask
@@ -215,10 +217,10 @@ public class InMemoryTaskManager implements TaskManager {
 
     // Печать списка всех подзадач определённого эпика по ID эпика +
     @Override
-    public void printSubtasksByEpics(int numberEpic) {
-        subtasks.values().stream()
+    public List<Subtask> getSubtasksByEpics(int numberEpic) {
+        return subtasks.values().stream()
                 .filter(subtask -> subtask.getEpicId() == numberEpic)
-                .forEach(System.out::println);
+                .collect(Collectors.toList());
     }
 
     // Получение истории задач +
@@ -233,12 +235,20 @@ public class InMemoryTaskManager implements TaskManager {
         return sortByTime.stream().toList();
     }
 
+    //Проверка задачи на пересечение по времени с другой задачей
+    @Override
+    public boolean checkTasksToTime() {
+        return checkTasks;
+    }
+
     //метод проверки пересечения времени задач и сохранения их в sortByTime
     protected void checkTasksCross(Task task) {
+        checkTasks = false;
         Set<Task> taskToAdd = new HashSet<>();
         Set<Task> crossTasks = new HashSet<>();
         if (sortByTime.isEmpty()) {
             sortByTime.add(task);
+            checkTasks = true;
         } else {
             crossTasks = sortByTime.stream()
                     .dropWhile(checkTasks -> {
@@ -254,7 +264,10 @@ public class InMemoryTaskManager implements TaskManager {
                         }
                     })
                     .collect(Collectors.toSet());
-            if (crossTasks.isEmpty() && !taskToAdd.isEmpty()) sortByTime.addAll(taskToAdd);
+            if (crossTasks.isEmpty() && !taskToAdd.isEmpty()) {
+                sortByTime.addAll(taskToAdd);
+                checkTasks = true;
+            }
         }
     }
 

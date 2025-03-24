@@ -36,8 +36,8 @@ class EpicTest {
         assertNotEquals(epic1.getId(), epic2.getId());
         assertEquals(epic1.getSubtasksIds(), epic2.getSubtasksIds());
         System.out.println("Подзадачи эпика с ID 1: ");
-        taskManager.printSubtasksByEpics(1);
+        taskManager.getSubtasksByEpics(1);
         System.out.println("Подзадачи эпика с ID 2: ");
-        taskManager.printSubtasksByEpics(2);
+        taskManager.getSubtasksByEpics(2);
     }
 }

@@ -1,6 +1,6 @@
 package taskmanager;
 
-import typeoftasks.*;
+import typeoftasks.Task;
 
 import java.util.List;
 

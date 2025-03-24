@@ -1,7 +1,10 @@
 package taskmanager;
 
 import status.Status;
-import typeoftasks.*;
+import typeoftasks.Epic;
+import typeoftasks.Subtask;
+import typeoftasks.Task;
+import typeoftasks.TypeOfTasks;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -117,8 +120,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public void printSubtasksByEpics(int numberEpic) {
-        super.printSubtasksByEpics(numberEpic);
+    public List<Subtask> getSubtasksByEpics(int numberEpic) {
+        return super.getSubtasksByEpics(numberEpic);
     }
 
     @Override
